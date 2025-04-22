@@ -1,0 +1,13 @@
+services:
+  - type: worker
+    name: alpaca-trading-bot
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python main.py"
+    envVars:
+      - key: APCA_API_KEY_ID
+        value: your_api_key
+      - key: APCA_API_SECRET_KEY
+        value: your_secret_key
+      - key: BASE_URL
+        value: https://paper-api.alpaca.markets
