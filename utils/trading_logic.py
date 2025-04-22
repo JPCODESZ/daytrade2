@@ -15,8 +15,9 @@ def run_trading_bot():
     symbols = ["AAPL", "TSLA"]  # Example symbols to scan
     for symbol in symbols:
         print(f"\nAnalyzing {symbol}...")
-        barset = api.get_barset(symbol, '5Min', limit=100)
-        df = pd.DataFrame([bar._raw for bar in barset[symbol]])
+       from alpaca_trade_api.rest import TimeFrame
+bars = api.get_bars(symbol, TimeFrame.Minute, limit=100).df
+df = bars[bars['symbol'] == symbol]
         df.set_index("t", inplace=True)
         df = apply_indicators(df)
 
